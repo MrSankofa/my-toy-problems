@@ -1,4 +1,4 @@
-name: Run Tests and Send Email
+name: Java CI with Maven
 
 on:
   push:
@@ -19,32 +19,25 @@ jobs:
         java-version: '11'
         distribution: 'adopt'
 
-    - name: Build with Maven
-      run: mvn -B package --file pom.xml
+    - name: Build and test with Maven
+      run: mvn -B test
 
-    - name: Run Tests
-      run: mvn test
-
-    - name: Send email
-      if: always()
-      uses: dawidd6/action-send-mail@v3
+    - name: Publish Test Report
+      uses: mikepenz/action-junit-report@v3
+      if: always() # always run even if the previous step fails
       with:
-        server_address: smtp.gmail.com
-        server_port: 465
-        username: ${{ secrets.EMAIL_USERNAME }}
-        password: ${{ secrets.EMAIL_PASSWORD }}
-        subject: GitHub Actions Test Results
-        body: |
-          Test results for RotLeft project:
-          
-          Workflow: ${{ github.workflow }}
-          Status: ${{ job.status }}
-          
-          Repository: ${{ github.repository }}
-          Branch: ${{ github.ref }}
-          Commit: ${{ github.sha }}
-          
-          For more details, visit:
-          ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
-        to: your-email@example.com
-        from: GitHub Actions
+        report_paths: '**/target/surefire-reports/TEST-*.xml'
+
+    - name: Upload Test Coverage
+      uses: actions/upload-artifact@v2
+      with:
+        name: test-coverage-report
+        path: target/site/jacoco/
+
+    - name: Post Test Summary
+      if: always()
+      run: |
+        echo "## Test Results Summary" >> $GITHUB_STEP_SUMMARY
+        echo "✨ **Build Status**: ${{ job.status }}" >> $GITHUB_STEP_SUMMARY
+        echo "🎯 **Total Tests**: $(find target/surefire-reports -name 'TEST-*.xml' | xargs grep -h "<testcase" | wc -l)" >> $GITHUB_STEP_SUMMARY
+        echo "❌ **Failed Tests**: $(find target/surefire-reports -name 'TEST-*.xml' | xargs grep -h "<failure" | wc -l)" >> $GITHUB_STEP_SUMMARY
