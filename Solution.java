@@ -25,36 +25,18 @@ class Result {
      */
 
   public static List<Integer> rotLeft(List<Integer> a, int d) {
-    d = d % a.size();
+      int n = a.size();
 
-    List<Integer> list = new ArrayList<>(a);
+      d = d % n;
 
-    for(int times = 0; times < d; times++){
-      list = rotOnce(list);
-    }
+      List<Integer> rotatedList = new ArrayList<>();
 
-    return list;
-
-  }
-
-  public static List<Integer> rotOnce(List<Integer> a) {
-    List<Integer> list = new ArrayList<>();
-
-    if(a.size() > 0) {
-      Integer first = a.get(0);
-
-      for( int index = 1; index < a.size(); index++) {
-        list.add(a.get(index));
+      for(int index = 0; index < n; index++) {
+        rotatedList.add(index, a.get((index + d) % n));
       }
 
-      list.add(first);
-
-      return list;
-    }
-
-    return list;
+      return rotatedList;
   }
-
 }
 
 public class Solution {
