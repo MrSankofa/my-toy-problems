@@ -10,10 +10,6 @@ jobs:
   test:
     runs-on: ubuntu-latest
 
-    permissions:
-      checks: write
-      pull-requests: write
-
     steps:
       - uses: actions/checkout@v2
 
@@ -26,13 +22,8 @@ jobs:
       - name: Build and test with Maven
         run: mvn -B verify
 
-      - name: Publish Test Report
-        uses: mikepenz/action-junit-report@v3
-        if: always()
-        with:
-          report_paths: '**/target/surefire-reports/TEST-*.xml'
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: List JaCoCo Report Directory
+        run: ls -R target/site/jacoco/
 
       - name: Upload Test Coverage
         uses: actions/upload-artifact@v3
@@ -41,6 +32,18 @@ jobs:
           path: target/site/jacoco/
           if-no-files-found: warn
 
+      - name: Publish Test Report
+        uses: mikepenz/action-junit-report@v3
+        if: always() # always run even if the previous step fails
+        with:
+          report_paths: '**/target/surefire-reports/TEST-*.xml'
+
+      - name: Upload Test Coverage
+        uses: actions/upload-artifact@v3  # Update to v3
+        with:
+          name: test-coverage-report
+          path: target/site/jacoco/
+
       - name: Post Test Summary
         if: always()
         run: |
@@ -48,19 +51,3 @@ jobs:
           echo "✨ **Build Status**: ${{ job.status }}" >> $GITHUB_STEP_SUMMARY
           echo "🎯 **Total Tests**: $(find target/surefire-reports -name 'TEST-*.xml' | xargs grep -h "<testcase" | wc -l)" >> $GITHUB_STEP_SUMMARY
           echo "❌ **Failed Tests**: $(find target/surefire-reports -name 'TEST-*.xml' | xargs grep -h "<failure" | wc -l)" >> $GITHUB_STEP_SUMMARY
-
-      - name: Generate Detailed Test Summary
-        run: |
-            echo "## Detailed Test Results" >> $GITHUB_STEP_SUMMARY
-            for test_file in $(find target/surefire-reports -name 'TEST-*.xml'); do
-              echo "### $(basename $test_file)" >> $GITHUB_STEP_SUMMARY
-              tests=$(xmllint --xpath 'string(count(//testcase))' $test_file)
-              failures=$(xmllint --xpath 'string(count(//testcase[failure]))' $test_file)
-              echo "Total: $tests, Failures: $failures" >> $GITHUB_STEP_SUMMARY
-              xmllint --format $test_file | grep -oP '(?<=<testcase ).*?(?=</testcase>)' | while read testcase; do
-                classname=$(echo $testcase | grep -oP '(?<=classname=").*?(?=")')
-                name=$(echo $testcase | grep -oP '(?<=name=").*?(?=")')
-                failure=$(echo $testcase | grep -oP '(?<=<failure ).*?(?=</failure>)' || echo "None")
-                echo "- **$classname.$name**: $(if [ "$failure" != "None" ]; then echo "❌ Failed - $failure"; else echo "✅ Passed"; fi)" >> $GITHUB_STEP_SUMMARY
-              done
-            done
