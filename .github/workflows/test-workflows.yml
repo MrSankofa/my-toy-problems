@@ -20,7 +20,17 @@ jobs:
           distribution: 'adopt'
 
       - name: Build and test with Maven
-        run: mvn -B test
+        run: mvn -B verify
+
+      - name: List JaCoCo Report Directory
+        run: ls -R target/site/jacoco/
+
+      - name: Upload Test Coverage
+        uses: actions/upload-artifact@v3
+        with:
+          name: test-coverage-report
+          path: target/site/jacoco/
+          if-no-files-found: warn
 
       - name: Publish Test Report
         uses: mikepenz/action-junit-report@v3
