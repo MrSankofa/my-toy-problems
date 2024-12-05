@@ -50,6 +50,7 @@ jobs:
           echo "❌ **Failed Tests**: $(find target/surefire-reports -name 'TEST-*.xml' | xargs grep -h "<failure" | wc -l)" >> $GITHUB_STEP_SUMMARY
 
       - name: Generate Detailed Test Summary
+        if: always()
         run: |
             echo "## Detailed Test Results" >> $GITHUB_STEP_SUMMARY
             for test_file in $(find target/surefire-reports -name 'TEST-*.xml'); do
