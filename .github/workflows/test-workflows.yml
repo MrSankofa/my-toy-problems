@@ -41,6 +41,17 @@ jobs:
           path: target/site/jacoco/
           if-no-files-found: warn
 
+      - name: Check for Failed Tests
+        id: check_failed_tests
+        run: |
+          failed_tests=$(find target/surefire-reports -name 'TEST-*.xml' | xargs grep -h "<failure" | wc -l)
+          if [ $failed_tests -gt 0 ]; then
+            echo "Failed tests found: $failed_tests:
+            exit 1
+          else
+            echo "All Tests Passed"
+          fi
+
       - name: Post Test Summary
         if: always()
         run: |
