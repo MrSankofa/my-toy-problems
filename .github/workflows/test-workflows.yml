@@ -24,31 +24,29 @@ jobs:
           distribution: 'adopt'
 
       - name: Build and test with Maven
-        working-directory: ./java   # Specify the java directory
         run: mvn -B verify
+        working-directory: ./java
 
       - name: Publish Test Report
-        working-directory: ./java   # Specify the java directory
         uses: mikepenz/action-junit-report@v3
         if: always()
         with:
           report_paths: '**/target/surefire-reports/TEST-*.xml'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        working-directory: ./java
 
       - name: Upload Test Coverage
-        working-directory: ./java   # Specify the java directory
         uses: actions/upload-artifact@v3
         with:
           name: test-coverage-report
-          path: target/site/jacoco/
+          path: java/target/site/jacoco/
           if-no-files-found: warn
 
       - name: Check for Failed Tests
-        working-directory: ./java   # Specify the java directory
         id: check_failed_tests
         run: |
-          failed_tests=$(find target/surefire-reports -name 'TEST-*.xml' | xargs grep -h "<failure" | wc -l)
+          failed_tests=$(find java/target/surefire-reports -name 'TEST-*.xml' | xargs grep -h "<failure" | wc -l)
           if [ $failed_tests -gt 0 ]; then
             echo "Failed tests found: $failed_tests"
             exit 1
@@ -57,10 +55,9 @@ jobs:
           fi
 
       - name: Post Test Summary
-        working-directory: ./java   # Specify the java directory
         if: always()
         run: |
           echo "## Test Results Summary" >> $GITHUB_STEP_SUMMARY
           echo "✨ **Build Status**: ${{ job.status }}" >> $GITHUB_STEP_SUMMARY
-          echo "🎯 **Total Tests**: $(find target/surefire-reports -name 'TEST-*.xml' | xargs grep -h "<testcase" | wc -l)" >> $GITHUB_STEP_SUMMARY
-          echo "❌ **Failed Tests**: $(find target/surefire-reports -name 'TEST-*.xml' | xargs grep -h "<failure" | wc -l)" >> $GITHUB_STEP_SUMMARY
+          echo "🎯 **Total Tests**: $(find java/target/surefire-reports -name 'TEST-*.xml' | xargs grep -h "<testcase" | wc -l)" >> $GITHUB_STEP_SUMMARY
+          echo "❌ **Failed Tests**: $(find java/target/surefire-reports -name 'TEST-*.xml' | xargs
