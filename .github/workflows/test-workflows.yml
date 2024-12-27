@@ -74,17 +74,3 @@ jobs:
             echo "## Test Results Summary" >> $GITHUB_STEP_SUMMARY
             echo "🚨 No test reports found. Tests may not have run." >> $GITHUB_STEP_SUMMARY
           fi
-
-      - name: Post Test Summary Backup
-        if: always()
-        run: |
-          total_tests=$(find ./java/target/surefire-reports -name 'TEST-*.xml' | xargs grep -h "<testcase" | wc -l)
-          echo "## Test Results Summary" >> $GITHUB_STEP_SUMMARY
-          echo "🎯 **Total Tests**: ${total_tests}" >> $GITHUB_STEP_SUMMARY      
-
-      - name: Debug Test Reports
-        run: |
-          echo "List of test report files:"
-          ls -al ./java/target/surefire-reports
-          echo "Content of a sample test report:"
-          cat ./java/target/surefire-reports/TEST-*.xml
