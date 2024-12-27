@@ -24,9 +24,11 @@ jobs:
           distribution: 'adopt'
 
       - name: Build and test with Maven
+        working-directory: ./java   # Specify the java directory
         run: mvn -B verify
 
       - name: Publish Test Report
+        working-directory: ./java   # Specify the java directory
         uses: mikepenz/action-junit-report@v3
         if: always()
         with:
@@ -35,6 +37,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Upload Test Coverage
+        working-directory: ./java   # Specify the java directory
         uses: actions/upload-artifact@v3
         with:
           name: test-coverage-report
@@ -42,6 +45,7 @@ jobs:
           if-no-files-found: warn
 
       - name: Check for Failed Tests
+        working-directory: ./java   # Specify the java directory
         id: check_failed_tests
         run: |
           failed_tests=$(find target/surefire-reports -name 'TEST-*.xml' | xargs grep -h "<failure" | wc -l)
@@ -53,6 +57,7 @@ jobs:
           fi
 
       - name: Post Test Summary
+        working-directory: ./java   # Specify the java directory
         if: always()
         run: |
           echo "## Test Results Summary" >> $GITHUB_STEP_SUMMARY
