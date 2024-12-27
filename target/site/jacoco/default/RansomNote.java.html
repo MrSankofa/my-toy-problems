@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>RansomNote.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">my-toy-problems</a> &gt; <a href="index.source.html" class="el_package">default</a> &gt; <span class="el_source">RansomNote.java</span></div><h1>RansomNote.java</h1><pre class="source lang-java linenums">import java.sql.Array;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.stream.Collectors;
+
+<span class="nc" id="L7">public class RansomNote {</span>
+  public static void main(String[] args) {
+<span class="nc" id="L9">    String[] magArray = {&quot;give&quot;, &quot;me&quot;, &quot;one&quot;, &quot;grand&quot;, &quot;today&quot;, &quot;night&quot;};</span>
+<span class="nc" id="L10">    String[] noteArray = {&quot;give&quot;, &quot;one&quot;, &quot;grand&quot;, &quot;today&quot;};</span>
+<span class="nc" id="L11">    RansomNote.checkMagazines(magArray, noteArray);</span>
+<span class="nc" id="L12">  }</span>
+
+  public static String checkMagazines(String[] magazines, String[] notes ) {
+
+    // create a word map count for the magazine and notes
+
+<span class="fc" id="L18">    Map&lt;String, Integer&gt; noteMap = new HashMap&lt;&gt;();</span>
+<span class="fc" id="L19">    Map&lt;String, Integer&gt; magazineMap = new HashMap&lt;&gt;();</span>
+
+
+<span class="fc bfc" id="L22" title="All 2 branches covered.">    for(String word: magazines) {</span>
+<span class="fc bfc" id="L23" title="All 2 branches covered.">      if( magazineMap.containsKey(word) ) {</span>
+<span class="fc" id="L24">        magazineMap.put(word, magazineMap.get(word) + 1);</span>
+      } else {
+<span class="fc" id="L26">        magazineMap.put(word, 1);</span>
+      }
+    }
+
+<span class="fc bfc" id="L30" title="All 2 branches covered.">    for(String word: notes) {</span>
+<span class="fc bfc" id="L31" title="All 2 branches covered.">      if( noteMap.containsKey(word) ) {</span>
+<span class="fc" id="L32">        noteMap.put(word, noteMap.get(word) + 1);</span>
+      } else {
+<span class="fc" id="L34">        noteMap.put(word, 1);</span>
+      }
+    }
+
+//    magazineMap = Arrays.stream(magazines).collect(Collectors.toMap( word -&gt; word, word -&gt; 1));
+//    noteMap = Arrays.stream(magazines).collect(Collectors.toMap( word -&gt; word, word -&gt; 1));
+
+    // loop through the note Map to check if the note word is in the magazine and if you have enough of them
+<span class="fc bfc" id="L42" title="All 2 branches covered.">    for(Map.Entry&lt;String, Integer&gt; entry: noteMap.entrySet()) {</span>
+<span class="fc bfc" id="L43" title="All 4 branches covered.">      if( magazineMap.containsKey(entry.getKey()) &amp;&amp; magazineMap.get(entry.getKey()) &gt;= entry.getValue()) {</span>
+
+      } else {
+<span class="fc" id="L46">        return &quot;No&quot;;</span>
+      }
+<span class="fc" id="L48">    }</span>
+
+<span class="fc" id="L50">    return &quot;Yes&quot;;</span>
+      // if the word is not in there or you don't have enough
+        // print No
+
+
+    // print yes
+
+
+
+  }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>
