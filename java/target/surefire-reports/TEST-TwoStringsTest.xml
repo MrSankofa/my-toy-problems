@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="HourGlassSumTest" time="0" tests="3" errors="0" skipped="3" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="TwoStringsTest" time="0.384" tests="4" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.specification.version" value="21"/>
     <property name="sun.jnu.encoding" value="UTF-8"/>
@@ -58,13 +58,8 @@
     <property name="socksNonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
     <property name="java.class.version" value="65.0"/>
   </properties>
-  <testcase name="testCase0" classname="HourGlassSumTest" time="0">
-    <skipped message="This test is skipped because it is not meant to be implemented."/>
-  </testcase>
-  <testcase name="testCase1" classname="HourGlassSumTest" time="0">
-    <skipped message="This test is skipped because it is not meant to be implemented."/>
-  </testcase>
-  <testcase name="testZeroSum" classname="HourGlassSumTest" time="0">
-    <skipped message="This test is skipped because it is not meant to be implemented."/>
-  </testcase>
+  <testcase name="testHappyPath" classname="TwoStringsTest" time="0"/>
+  <testcase name="testNoCommonSubstringPerformance" classname="TwoStringsTest" time="0.185"/>
+  <testcase name="testHappyMissingPath" classname="TwoStringsTest" time="0"/>
+  <testcase name="testPerformanceTwoStrings" classname="TwoStringsTest" time="0.198"/>
 </testsuite>

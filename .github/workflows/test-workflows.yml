@@ -1,4 +1,4 @@
-name: Java and JavaScript CI
+name: Java, JavaScript, and Python CI
 
 on:
   push:
@@ -69,6 +69,36 @@ jobs:
           echo "failed_js_tests=${failed_js_tests}" >> $GITHUB_ENV
           echo "skipped_js_tests=${skipped_js_tests}" >> $GITHUB_ENV
 
+      # Set up Python environment
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      # Install Python dependencies
+      - name: Install Python dependencies
+        run: pip install -r requirements.txt
+        working-directory: ./python
+
+      # Run Python tests with pytest
+      - name: Run Python tests
+        run: pytest --json-report --json-report-file=pytest-report.json
+        working-directory: ./python
+
+      # Parse Python test results
+      - name: Parse Python Test Results
+        if: always()
+        run: |
+          total_py_tests=$(cat ./python/pytest-report.json | jq '.summary.num_tests')
+          passed_py_tests=$(cat ./python/pytest-report.json | jq '.summary.passed')
+          failed_py_tests=$(cat ./python/pytest-report.json | jq '.summary.failed')
+          skipped_py_tests=$(cat ./python/pytest-report.json | jq '.summary.skipped')
+
+          echo "total_py_tests=${total_py_tests}" >> $GITHUB_ENV
+          echo "passed_py_tests=${passed_py_tests}" >> $GITHUB_ENV
+          echo "failed_py_tests=${failed_py_tests}" >> $GITHUB_ENV
+          echo "skipped_py_tests=${skipped_py_tests}" >> $GITHUB_ENV
+
       # Post Combined Test Summary
       - name: Post Test Summary
         if: always()
@@ -92,6 +122,12 @@ jobs:
           failed_js_tests=${{ env.failed_js_tests }}
           skipped_js_tests=${{ env.skipped_js_tests }}
 
+          # Fetch Python test results from environment variables
+          total_py_tests=${{ env.total_py_tests }}
+          passed_py_tests=${{ env.passed_py_tests }}
+          failed_py_tests=${{ env.failed_py_tests }}
+          skipped_py_tests=${{ env.skipped_py_tests }}
+
           # Post combined summary
           echo "## Test Results Summary" >> $GITHUB_STEP_SUMMARY
           echo "✨ **Build Status**: ${{ job.status }}" >> $GITHUB_STEP_SUMMARY
@@ -109,3 +145,10 @@ jobs:
           echo "✅ **Passed Tests**: ${passed_js_tests}" >> $GITHUB_STEP_SUMMARY
           echo "⚠️ **Skipped Tests**: ${skipped_js_tests}" >> $GITHUB_STEP_SUMMARY
           echo "❌ **Failed Tests**: ${failed_js_tests}" >> $GITHUB_STEP_SUMMARY
+
+          # Python Test Results
+          echo "### Python Tests" >> $GITHUB_STEP_SUMMARY
+          echo "🎯 **Total Tests**: ${total_py_tests}" >> $GITHUB_STEP_SUMMARY
+          echo "✅ **Passed Tests**: ${passed_py_tests}" >> $GITHUB_STEP_SUMMARY
+          echo "⚠️ **Skipped Tests**: ${skipped_py_tests}" >> $GITHUB_STEP_SUMMARY
+          echo "❌ **Failed Tests**: ${failed_py_tests}" >> $GITHUB_STEP_SUMMARY
