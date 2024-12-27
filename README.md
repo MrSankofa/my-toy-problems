@@ -28,19 +28,19 @@ my-toy-problems/
 
 
 ## Running Tests
-### Java
 
+### Java local tests
 ```
 cd java
 mvn test
 ```
-
+### Python local tests
 ```
 cd python
 pip install -r requirements.txt
 pytest
 ```
-
+### Javascript local tests
 ```
 cd javascript
 npm install
