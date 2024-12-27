@@ -63,7 +63,14 @@ jobs:
       - name: Post Test Summary
         if: always()
         run: |
-          echo "## Test Results Summary" >> $GITHUB_STEP_SUMMARY
-          echo "✨ **Build Status**: ${{ job.status }}" >> $GITHUB_STEP_SUMMARY
-          echo "🎯 **Total Tests**: $(find ./java/target/surefire-reports -name 'TEST-*.xml' | xargs grep -h "<testcase" | wc -l)" >> $GITHUB_STEP_SUMMARY
-          echo "❌ **Failed Tests**: $(find ./java/target/surefire-reports -
+          if [ -d "./java/target/surefire-reports" ]; then
+            total_tests=$(find ./java/target/surefire-reports -name 'TEST-*.xml' | xargs grep -h "<testcase" | wc -l)
+            failed_tests=$(find ./java/target/surefire-reports -name 'TEST-*.xml' | xargs grep -h "<failure" | wc -l)
+            echo "## Test Results Summary" >> $GITHUB_STEP_SUMMARY
+            echo "✨ **Build Status**: ${{ job.status }}" >> $GITHUB_STEP_SUMMARY
+            echo "🎯 **Total Tests**: ${total_tests}" >> $GITHUB_STEP_SUMMARY
+            echo "❌ **Failed Tests**: ${failed_tests}" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "## Test Results Summary" >> $GITHUB_STEP_SUMMARY
+            echo "🚨 No test reports found. Tests may not have run." >> $GITHUB_STEP_SUMMARY
+          fi
