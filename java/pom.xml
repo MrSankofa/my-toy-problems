@@ -29,7 +29,7 @@
                 <version>2.22.2</version>
                 <configuration>
                     <testFailureIgnore>true</testFailureIgnore>
-                    <reportsDirectory>../target/surefire-reports</reportsDirectory>
+                    <reportsDirectory>target/surefire-reports</reportsDirectory>
                 </configuration>
             </plugin>
             <!-- Add JaCoCo plugin for test coverage reports -->
