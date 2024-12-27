@@ -43,7 +43,7 @@ public class RansomNote {
       if( magazineMap.containsKey(entry.getKey()) && magazineMap.get(entry.getKey()) >= entry.getValue()) {
 
       } else {
-        return "Yes";
+        return "No";
       }
     }
 
