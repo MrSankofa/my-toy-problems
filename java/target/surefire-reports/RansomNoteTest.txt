@@ -1,4 +1,12 @@
 -------------------------------------------------------------------------------
 Test set: RansomNoteTest
 -------------------------------------------------------------------------------
-Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.16 s - in RansomNoteTest
+Tests run: 4, Failures: 2, Errors: 0, Skipped: 0, Time elapsed: 0.241 s <<< FAILURE! - in RansomNoteTest
+testHappyMultipleOfEach  Time elapsed: 0.007 s  <<< FAILURE!
+org.opentest4j.AssertionFailedError: expected: <No> but was: <Yes>
+	at RansomNoteTest.testHappyMultipleOfEach(RansomNoteTest.java:17)
+
+testMissingWord  Time elapsed: 0.001 s  <<< FAILURE!
+org.opentest4j.AssertionFailedError: expected: <No> but was: <Yes>
+	at RansomNoteTest.testMissingWord(RansomNoteTest.java:24)
+
