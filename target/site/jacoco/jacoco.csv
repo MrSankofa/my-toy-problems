@@ -1,7 +1,0 @@
-GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
-my-toy-problems,default,Briber,117,0,10,0,21,0,8,0,3,0
-my-toy-problems,default,RotLeftSolution,48,0,4,0,9,0,4,0,2,0
-my-toy-problems,default,RotLeft,3,4,0,0,1,1,1,1,1,1
-my-toy-problems,default,HourGlassSumSolution,125,0,10,0,12,0,7,0,2,0
-my-toy-problems,default,RansomNote,54,119,0,14,5,15,2,8,2,1
-my-toy-problems,default,HourGlassSum,3,2,0,0,1,1,1,1,1,1

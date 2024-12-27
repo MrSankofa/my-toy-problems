@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>HourGlassSum.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">java-toy-problems</a> &gt; <a href="index.source.html" class="el_package">default</a> &gt; <span class="el_source">HourGlassSum.java</span></div><h1>HourGlassSum.java</h1><pre class="source lang-java linenums">import java.util.ArrayList;
+import java.util.List;
+
+<span class="nc" id="L4">public class HourGlassSum {</span>
+  /*
+   Given a  2D Array, :
+
+1 1 1 0 0 0
+0 1 0 0 0 0
+1 1 1 0 0 0
+0 0 0 0 0 0
+0 0 0 0 0 0
+0 0 0 0 0 0
+An hourglass in  is a subset of values with indices falling in this pattern in 's graphical representation:
+
+a b c
+  d
+e f g
+There are  hourglasses in . An hourglass sum is the sum of an hourglass' values. Calculate the hourglass sum for every hourglass in , then print the maximum hourglass sum. The array will always be .
+
+Example
+
+
+-9 -9 -9  1 1 1
+ 0 -9  0  4 3 2
+-9 -9 -9  1 2 3
+ 0  0  8  6 6 0
+ 0  0  0 -2 0 0
+ 0  0  1  2 4 0
+The  hourglass sums are:
+
+-63, -34, -9, 12,
+-10,   0, 28, 23,
+-27, -11, -2, 10,
+  9,  17, 25, 18
+The highest hourglass sum is  from the hourglass beginning at row , column :
+
+0 4 3
+  1
+8 6 6
+Note: If you have already solved the Java domain's Java 2D Array challenge, you may wish to skip this challenge.
+
+Function Description
+
+Complete the function hourglassSum in the editor below.
+
+hourglassSum has the following parameter(s):
+
+int arr[6][6]: an array of integers
+Returns
+
+int: the maximum hourglass sum
+Input Format
+
+Each of the  lines of inputs  contains  space-separated integers .
+
+Constraints
+
+Output Format
+
+Print the largest (maximum) hourglass sum found in .
+
+Sample Input
+
+1 1 1 0 0 0
+0 1 0 0 0 0
+1 1 1 0 0 0
+0 0 2 4 4 0
+0 0 0 2 0 0
+0 0 1 2 4 0
+Sample Output
+
+19
+Explanation
+
+ contains the following hourglasses:
+
+image
+
+The hourglass with the maximum sum () is:
+
+2 4 4
+  2
+1 2 4
+ */
+
+  public static int hourglassSum(List&lt;List&lt;Integer&gt;&gt; arr) {
+   // your code here
+<span class="nc" id="L89">    return Integer.MIN_VALUE;</span>
+  }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

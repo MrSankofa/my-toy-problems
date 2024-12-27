@@ -1,4 +1,4 @@
-# my-toy-problems
+# Toy Problems Repository
 
 Goal:
 
@@ -12,3 +12,38 @@ https://github.com/MrSankofa/my-toy-problems
 
 
 you have to make pull requests and seperate branches
+
+
+This repository contains toy problem implementations and tests for three languages:
+- **Java**
+- **Python**
+- **JavaScript**
+
+## Project Structure
+my-toy-problems/ 
+├── java/ # Java implementations and tests 
+├── python/ # Python implementations and tests 
+├── javascript/ # JavaScript implementations and tests 
+└── .github/workflows/ # CI configurations
+
+
+## Running Tests
+### Java
+
+```
+cd java
+mvn test
+```
+
+```
+cd python
+pip install -r requirements.txt
+pytest
+```
+
+```
+cd javascript
+npm install
+npm test 
+```
+

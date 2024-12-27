@@ -15,36 +15,43 @@ jobs:
       pull-requests: write
 
     steps:
+      # Checkout the repository
       - uses: actions/checkout@v2
 
+      # Set up Java environment
       - name: Set up JDK 11
         uses: actions/setup-java@v2
         with:
           java-version: '11'
           distribution: 'adopt'
 
+      # Build and test using Maven
       - name: Build and test with Maven
         run: mvn -B verify
+        working-directory: ./java
 
+      # Publish test reports
       - name: Publish Test Report
         uses: mikepenz/action-junit-report@v3
         if: always()
         with:
-          report_paths: '**/target/surefire-reports/TEST-*.xml'
+          report_paths: './java/target/surefire-reports/TEST-*.xml'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+      # Upload test coverage report
       - name: Upload Test Coverage
         uses: actions/upload-artifact@v3
         with:
           name: test-coverage-report
-          path: target/site/jacoco/
+          path: ./java/target/site/jacoco/
           if-no-files-found: warn
 
+      # Check for failed tests
       - name: Check for Failed Tests
         id: check_failed_tests
         run: |
-          failed_tests=$(find target/surefire-reports -name 'TEST-*.xml' | xargs grep -h "<failure" | wc -l)
+          failed_tests=$(find ./java/target/surefire-reports -name 'TEST-*.xml' | xargs grep -h "<failure" | wc -l)
           if [ $failed_tests -gt 0 ]; then
             echo "Failed tests found: $failed_tests"
             exit 1
@@ -55,7 +62,19 @@ jobs:
       - name: Post Test Summary
         if: always()
         run: |
-          echo "## Test Results Summary" >> $GITHUB_STEP_SUMMARY
-          echo "✨ **Build Status**: ${{ job.status }}" >> $GITHUB_STEP_SUMMARY
-          echo "🎯 **Total Tests**: $(find target/surefire-reports -name 'TEST-*.xml' | xargs grep -h "<testcase" | wc -l)" >> $GITHUB_STEP_SUMMARY
-          echo "❌ **Failed Tests**: $(find target/surefire-reports -name 'TEST-*.xml' | xargs grep -h "<failure" | wc -l)" >> $GITHUB_STEP_SUMMARY
+          if [ -d "./java/target/surefire-reports" ]; then
+            total_tests=$(find ./java/target/surefire-reports -name 'TEST-*.xml' | xargs grep -h "<testcase" | wc -l)
+            failed_tests=$(find ./java/target/surefire-reports -name 'TEST-*.xml' | xargs grep -h "<failure" | wc -l)
+            skipped_tests=$(find ./java/target/surefire-reports -name 'TEST-*.xml' | xargs grep -h "<skipped" | wc -l)
+            passed_tests=$((total_tests - failed_tests - skipped_tests))
+          
+            echo "## Test Results Summary" >> $GITHUB_STEP_SUMMARY
+            echo "✨ **Build Status**: ${{ job.status }}" >> $GITHUB_STEP_SUMMARY
+            echo "🎯 **Total Tests**: ${total_tests}" >> $GITHUB_STEP_SUMMARY
+            echo "✅ **Passed Tests**: ${passed_tests}" >> $GITHUB_STEP_SUMMARY
+            echo "⚠️ **Skipped Tests**: ${skipped_tests}" >> $GITHUB_STEP_SUMMARY
+            echo "❌ **Failed Tests**: ${failed_tests}" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "## Test Results Summary" >> $GITHUB_STEP_SUMMARY
+            echo "🚨 No test reports found. Tests may not have run." >> $GITHUB_STEP_SUMMARY
+          fi

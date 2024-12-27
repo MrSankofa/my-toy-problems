@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>HourGlassSumSolution.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">java-toy-problems</a> &gt; <a href="index.source.html" class="el_package">default</a> &gt; <span class="el_source">HourGlassSumSolution.java</span></div><h1>HourGlassSumSolution.java</h1><pre class="source lang-java linenums">import java.util.List;
+
+<span class="nc" id="L3">public class HourGlassSumSolution {</span>
+  /*
+     * Complete the 'hourglassSum' function below.
+     *
+     * The function is expected to return an INTEGER.
+     * The function accepts 2D_INTEGER_ARRAY arr as parameter.
+
+     I: 6x6 array
+     O: print Integer, max sum
+
+     constraints: each element is -9 &lt;= x &lt;= 9
+
+     Approach:
+     - update the max sum as you go
+     - for each coordinate i, j,
+        if the hour glass is possible
+            sum 7 elements
+            currentSum = [i][j] + [i + 1][j] + [i+2][j] + [i + 1][j + 1] + [i + 1][j + 2] + [i + 2][j +2] + [i][j + 2]
+
+        if currentSum &gt; maxSum
+            maxSum = currentSum
+
+            Notes make sure you are accessing and thinking about the matrix correctly.
+            in a 2d array, the first index gives you a list of rows, the second index element but incrementing the second index gives you the col
+     */
+
+  public static int hourglassSum(List&lt;List&lt;Integer&gt;&gt; arr) {
+<span class="nc" id="L30">    Integer maxSum = Integer.MIN_VALUE;</span>
+
+
+<span class="nc bnc" id="L33" title="All 2 branches missed.">    for(int i = 0; i &lt; 6; i++) {</span>
+<span class="nc bnc" id="L34" title="All 2 branches missed.">      for(int j = 0; j &lt; 6; j++) {</span>
+<span class="nc" id="L35">        Integer currentSum = Integer.MIN_VALUE;</span>
+<span class="nc bnc" id="L36" title="All 4 branches missed.">        if( i + 2 &lt; 6 &amp;&amp; j +2 &lt; 6) {</span>
+          // currentSum = arr.get(i).get(j);
+<span class="nc" id="L38">          currentSum = arr.get(i).get(j) + arr.get(i).get(j + 1) + arr.get(i).get(j + 2)</span>
+<span class="nc" id="L39">              + arr.get(i + 1).get(j + 1)</span>
+<span class="nc" id="L40">              + arr.get(i + 2).get(j) + arr.get(i + 2).get(j + 1) + arr.get(i + 2).get(j + 2);</span>
+        }
+
+<span class="nc bnc" id="L43" title="All 2 branches missed.">        if(currentSum &gt; maxSum) {</span>
+<span class="nc" id="L44">          maxSum = currentSum;</span>
+        }
+      }
+    }
+
+<span class="nc" id="L49">    return maxSum;</span>
+  }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

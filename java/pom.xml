@@ -4,13 +4,8 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.myToyProblems</groupId>
-    <artifactId>my-toy-problems</artifactId>
+    <artifactId>java-toy-problems</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <packaging>pom</packaging>
-    <modules>
-        <module>java</module>
-        <!-- Python and JavaScript can still be managed independently -->
-    </modules>
 
     <properties>
         <maven.compiler.source>11</maven.compiler.source>
@@ -34,7 +29,7 @@
                 <version>2.22.2</version>
                 <configuration>
                     <testFailureIgnore>true</testFailureIgnore>
-                    <reportsDirectory>../target/surefire-reports</reportsDirectory>
+                    <reportsDirectory>target/surefire-reports</reportsDirectory>
                 </configuration>
             </plugin>
             <!-- Add JaCoCo plugin for test coverage reports -->
