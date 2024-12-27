@@ -59,15 +59,15 @@ jobs:
             echo "All Tests Passed"
           fi
 
-      # Post detailed test summary
       - name: Post Test Summary
         if: always()
         run: |
           if [ -d "./java/target/surefire-reports" ]; then
             total_tests=$(find ./java/target/surefire-reports -name 'TEST-*.xml' | xargs grep -h "<testcase" | wc -l)
-            passed_tests=$(find ./java/target/surefire-reports -name 'TEST-*.xml' | xargs grep -h "<testcase" | grep -v "<failure" | grep -v "<skipped" | wc -l)
-            skipped_tests=$(find ./java/target/surefire-reports -name 'TEST-*.xml' | xargs grep -h "<skipped" | wc -l)
             failed_tests=$(find ./java/target/surefire-reports -name 'TEST-*.xml' | xargs grep -h "<failure" | wc -l)
+            skipped_tests=$(find ./java/target/surefire-reports -name 'TEST-*.xml' | xargs grep -h "<skipped" | wc -l)
+            passed_tests=$((total_tests - failed_tests - skipped_tests))
+          
             echo "## Test Results Summary" >> $GITHUB_STEP_SUMMARY
             echo "✨ **Build Status**: ${{ job.status }}" >> $GITHUB_STEP_SUMMARY
             echo "🎯 **Total Tests**: ${total_tests}" >> $GITHUB_STEP_SUMMARY
