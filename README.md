@@ -11,21 +11,12 @@ https://www.hackerrank.com/challenges/new-year-chaos/problem?isFullScreen=true&h
 https://github.com/MrSankofa/my-toy-problems
 
 
-you have to make pull requests and seperate branches
-
+you have to make pull requests and separate branches
 
 This repository contains toy problem implementations and tests for three languages:
-- **Java**
-- **Python**
-- **JavaScript**
-
-## Project Structure
-my-toy-problems/ 
-|-- java/ # Java implementations and tests
-|-- python/ # Python implementations and tests
-|-- javascript/ # JavaScript implementations and tests
-|__ .github/workflows/ # CI configurations
-
+- **Java implementations and tests**
+- **Python implementations and tests**
+- **JavaScript implementations and tests**
 
 ## Running Tests
 
