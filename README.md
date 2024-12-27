@@ -21,9 +21,12 @@ This repository contains toy problem implementations and tests for three languag
 
 ## Project Structure
 my-toy-problems/ 
-├── java/ # Java implementations and tests 
-├── python/ # Python implementations and tests 
-├── javascript/ # JavaScript implementations and tests 
+├── java/ # Java implementations and tests
+
+├── python/ # Python implementations and tests
+
+├── javascript/ # JavaScript implementations and tests
+
 └── .github/workflows/ # CI configurations
 
 
