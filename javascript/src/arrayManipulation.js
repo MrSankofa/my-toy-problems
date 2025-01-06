@@ -77,11 +77,11 @@ const arrayManipulation = (n, queries) => {
   }
 
   // iterate through the n size array and find the max
-  nArr.forEach( amount => {
+  for(const amount of nArr) {
     if( amount > max) {
       max = amount;
     }
-  })
+  }
 
 
 
