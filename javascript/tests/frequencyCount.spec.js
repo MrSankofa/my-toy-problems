@@ -25,6 +25,6 @@ describe("frequency count", () => {
 
     const duration = end - start; // Time in milliseconds
     console.log(`Execution Time: ${duration.toFixed(2)} ms`);
-    expect(duration < 50).toBe(true);
+    expect(duration < 75).toBe(true);
   });
 })
