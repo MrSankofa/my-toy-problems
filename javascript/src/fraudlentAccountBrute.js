@@ -6,9 +6,9 @@ function activityNotifications(expenditure, d) {
     if(list.length % 2 === 0) {
       const halfMark = list.length / 2;
 
-      median = (list[halfMark] + list[halfMark + 1]) / 2;
+      median = (list[halfMark - 1] + list[halfMark]) / 2;
     } else {
-      median = Math.floor(list.length / 2)+ 1;
+      median = Math.floor(list.length / 2);
     }
 
     return median
