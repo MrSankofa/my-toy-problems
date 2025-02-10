@@ -1,17 +1,12 @@
 import org.junit.jupiter.api.Test;
 
-import java.io.IOException;
-import java.net.URISyntaxException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 class isValidStringTest {
 
   @Test
   void isValidString() {
-    assertEquals("YES", IsValidString.isValidString("abc"));
+    assertEquals("YES", IsValidString.myIsValidString("abc"));
   }
 //
 //  @Test
@@ -21,4 +16,7 @@ class isValidStringTest {
 //
 //    assertEquals("YES", IsValidString.isValidString("hugeString"));
 //  }
+
+  @Test
+  void optimalIsValidString() { assertEquals("YES", IsValidString.isValid("aaabbbcccc"));}
 }
