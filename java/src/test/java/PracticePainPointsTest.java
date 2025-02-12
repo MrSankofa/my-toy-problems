@@ -185,10 +185,26 @@ public class PracticePainPointsTest {
   }
 
   @Test
-  public void sortKeysFromHashMap() {}
+  public void sortKeysFromHashMap() {
+    List<String> list = PracticePainPoints.sortMapKeys(map);
+    assertTrue(list instanceof ArrayList);
+    assertEquals(3, list.size());
+    assertEquals("brett", list.get(0));
+    assertEquals("courtney", list.get(1));
+    assertEquals("josh", list.get(2));
+
+  }
 
   @Test
-  public void sortValuesFromMap() {}
+  public void sortValuesFromMap() {
+    List<Integer> list = PracticePainPoints.sortMapToListInts(map);
+
+    assertTrue(list instanceof ArrayList);
+    assertEquals(3, list.size());
+    assertEquals(1, list.get(0));
+    assertEquals(2, list.get(1));
+    assertEquals(3, list.get(2));
+  }
 
   @Test
   public void sortValuesFromHashMap() {}

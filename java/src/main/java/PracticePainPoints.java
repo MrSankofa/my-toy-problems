@@ -117,6 +117,21 @@ public class PracticePainPoints {
     return keys;
   }
 
+  public static List<Integer> sortMapToListInts(Map<String, Integer> map) {
+    List<Integer> list = new ArrayList();
+
+    map.forEach((ignored, v) -> list.add(v));
+
+    return list;
+  }
+
+  public static List<String> sortMapToListStrings(Map<String, Integer> map) {
+    List<String> list = new ArrayList<>(map.keySet());
+    Collections.sort(list);
+
+    return list;
+  }
+
 
 
 
