@@ -33,8 +33,7 @@ class MakeAnagramTest {
     String largeB = "b".repeat(500_000) + "c".repeat(500_000);
 
     // Should still run in linear time (under 500ms)
-    assertTimeoutPreemptively(Duration.ofMillis(2000), () -> {
-      System.out.println("Timedout after two seconds");
+    assertTimeoutPreemptively(Duration.ofMillis(1500), () -> {
       MakeAnagram.makeAnagram(largeA, largeB);
     });
   }
