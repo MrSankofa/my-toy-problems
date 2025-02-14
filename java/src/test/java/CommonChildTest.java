@@ -2,6 +2,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class CommonChildTest {
 
@@ -11,6 +12,25 @@ public class CommonChildTest {
   public void findLongestCommonStringNonSkippingLetters() {
 
     assertEquals(2, CommonChild.commonChild("ABC", "BCD"));
+  }
+
+  @Test
+  @DisplayName("Should work for more complex example")
+  public void shouldWorkForMoreComplexExample() {
+
+    assertEquals(2, CommonChild.commonChild("SH", "BCD"));
+  }
+
+  @Test
+  @DisplayName("First Try Method should work for basic example")
+  public void firstTryMethodShouldWorkForBasicExample() {
+    assertEquals(2, CommonChild.firstTry("ABC", "BCD"));
+  }
+
+  @Test
+  @DisplayName("First Try Method should work for basic example")
+  public void firstTryMethodShouldWillNotWorkForReverseExample() {
+    assertTrue(2 != CommonChild.firstTry("SHINCHAN", "NOHARAAA"));
   }
 
 }
