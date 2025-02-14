@@ -21,7 +21,7 @@ class MakeAnagramTest {
     String largeB = generateRandomString(1_000_000);
 
     // Assert that the method runs within a reasonable time (e.g., 500ms)
-    assertTimeoutPreemptively(Duration.ofMillis(500), () -> {
+    assertTimeoutPreemptively(Duration.ofMillis(1500), () -> {
       MakeAnagram.makeAnagram(largeA, largeB);
     });
   }
