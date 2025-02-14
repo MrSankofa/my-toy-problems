@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>PracticePainPoints.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">java-toy-problems</a> &gt; <a href="index.source.html" class="el_package">default</a> &gt; <span class="el_source">PracticePainPoints.java</span></div><h1>PracticePainPoints.java</h1><pre class="source lang-java linenums">import java.util.*;
+
+<span class="nc" id="L3">public class PracticePainPoints {</span>
+
+  public static Map convertHashSetToMap(HashSet set) {
+
+<span class="fc" id="L7">    Map map = new HashMap();</span>
+
+<span class="fc" id="L9">   set.stream().forEach(x -&gt; map.put(x, x));</span>
+
+<span class="fc" id="L11">    return map;</span>
+  }
+
+  public static Map convertHashSetToMapPreJava8(HashSet set) {
+
+<span class="fc" id="L16">    Map map = new HashMap();</span>
+
+<span class="fc" id="L18">    Iterator it = set.iterator();</span>
+
+<span class="fc bfc" id="L20" title="All 2 branches covered.">    while(it.hasNext()) {</span>
+<span class="fc" id="L21">      Object o = it.next();</span>
+
+<span class="fc" id="L23">      map.put(o, o);</span>
+<span class="fc" id="L24">    }</span>
+
+<span class="fc" id="L26">    return map;</span>
+  }
+
+  public static HashMap convertHashSetToHashMapPreJava8(HashSet set) {
+
+<span class="fc" id="L31">    HashMap map = new HashMap();</span>
+
+<span class="fc" id="L33">    Iterator it = set.iterator();</span>
+
+<span class="fc bfc" id="L35" title="All 2 branches covered.">    while(it.hasNext()) {</span>
+<span class="fc" id="L36">      Object o = it.next();</span>
+
+<span class="fc" id="L38">      map.put(o, o);</span>
+<span class="fc" id="L39">    }</span>
+
+<span class="fc" id="L41">    return map;</span>
+  }
+
+  public static HashMap convertHashSettoHashMap(HashSet set) {
+<span class="fc" id="L45">    HashMap map = new HashMap();</span>
+
+<span class="fc" id="L47">    set.stream().forEach(x -&gt; map.put(x, x));</span>
+
+<span class="fc" id="L49">    return map;</span>
+  }
+
+  public static Set convertMapToSet(Map map) {
+<span class="fc" id="L53">    Set set = new HashSet();</span>
+
+<span class="fc" id="L55">    map.values().stream().forEach(x -&gt; set.add(x));</span>
+
+<span class="fc" id="L57">    return set;</span>
+  }
+
+  public static HashMap convertMapToHashMap(Map map) {
+<span class="fc" id="L61">    HashMap hashMap = new HashMap();</span>
+
+<span class="fc" id="L63">    map.forEach((k, v) -&gt; hashMap.put(k, v));</span>
+
+<span class="fc" id="L65">    return hashMap;</span>
+  }
+
+  public static HashSet convertMapToHashSet(Map map) {
+<span class="fc" id="L69">    HashSet hashSet = new HashSet();</span>
+<span class="fc" id="L70">    map.values().stream().forEach(v -&gt; hashSet.add(v));</span>
+<span class="fc" id="L71">    map.forEach((ignored, v) -&gt; hashSet.add(v));</span>
+<span class="fc" id="L72">    return hashSet;</span>
+  }
+
+  public static List&lt;Integer&gt; convertMapToListInts(Map map) {
+
+<span class="fc" id="L77">    List&lt;Integer&gt; list = new ArrayList();</span>
+
+<span class="fc" id="L79">    map.forEach((ignored, v) -&gt; list.add((Integer) v));</span>
+
+<span class="fc" id="L81">    return list;</span>
+  }
+
+  public static ArrayList&lt;Integer&gt; convertMapToArrayLists(Map map) {
+
+<span class="fc" id="L86">    ArrayList&lt;Integer&gt; list = new ArrayList();</span>
+
+<span class="fc" id="L88">    map.forEach((ignored, v) -&gt; list.add((Integer) v));</span>
+
+<span class="fc" id="L90">    return list;</span>
+  }
+
+  public static int[] convertMapToArrayInt(Map map) {
+<span class="fc" id="L94">    int[] array = new int[map.size()];</span>
+
+<span class="fc" id="L96">    map.forEach((ignored, v) -&gt; array[(Integer) v - 1] = ((Integer) v));</span>
+
+<span class="fc" id="L98">    return array;</span>
+  }
+
+  public static &lt;T&gt; ArrayList&lt;T&gt; convertMapToArrayObjects(Map&lt;String, T&gt; map) {
+<span class="fc" id="L102">    ArrayList&lt;T&gt; list = new ArrayList();</span>
+<span class="fc" id="L103">    List&lt;String&gt; keys = new ArrayList&lt;&gt;(map.keySet());</span>
+
+<span class="fc" id="L105">    Collections.sort(keys);</span>
+
+<span class="fc bfc" id="L107" title="All 2 branches covered.">    for(String key : keys) {</span>
+<span class="fc" id="L108">      list.add(map.get(key));</span>
+<span class="fc" id="L109">    }</span>
+
+<span class="fc" id="L111">    return list;</span>
+  }
+
+  public static &lt;T&gt; ArrayList&lt;String&gt; sortMapKeys(Map&lt;String, T&gt; map) {
+<span class="fc" id="L115">    ArrayList&lt;String&gt; keys = new ArrayList&lt;&gt;(map.keySet());</span>
+<span class="fc" id="L116">    Collections.sort(keys);</span>
+<span class="fc" id="L117">    return keys;</span>
+  }
+
+  public static List&lt;Integer&gt; sortMapToListInts(Map&lt;String, Integer&gt; map) {
+<span class="fc" id="L121">    List&lt;Integer&gt; list = new ArrayList();</span>
+
+<span class="fc" id="L123">    map.forEach((ignored, v) -&gt; list.add(v));</span>
+
+<span class="fc" id="L125">    return list;</span>
+  }
+
+  public static List&lt;String&gt; sortMapToListStrings(Map&lt;String, Integer&gt; map) {
+<span class="nc" id="L129">    List&lt;String&gt; list = new ArrayList&lt;&gt;(map.keySet());</span>
+<span class="nc" id="L130">    Collections.sort(list);</span>
+
+<span class="nc" id="L132">    return list;</span>
+  }
+
+
+
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

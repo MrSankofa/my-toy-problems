@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="HourGlassSumTest" time="0" tests="3" errors="0" skipped="3" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="PracticePainPointsTest" time="0.02" tests="19" errors="0" skipped="0" failures="1">
   <properties>
     <property name="java.specification.version" value="21"/>
     <property name="sun.jnu.encoding" value="UTF-8"/>
@@ -57,13 +57,27 @@
     <property name="socksNonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
     <property name="java.class.version" value="65.0"/>
   </properties>
-  <testcase name="testCase0" classname="HourGlassSumTest" time="0">
-    <skipped message="This test is skipped because it is not meant to be implemented."/>
+  <testcase name="sortValuesFromHashMap" classname="PracticePainPointsTest" time="0.001"/>
+  <testcase name="sortArrayList" classname="PracticePainPointsTest" time="0"/>
+  <testcase name="convertSetToHashMap" classname="PracticePainPointsTest" time="0.001"/>
+  <testcase name="convertMapToArrayInt" classname="PracticePainPointsTest" time="0.002"/>
+  <testcase name="convertSetToMap" classname="PracticePainPointsTest" time="0.001"/>
+  <testcase name="convertMapToArrayListIntegers" classname="PracticePainPointsTest" time="0"/>
+  <testcase name="convertSetToMapPreJava8" classname="PracticePainPointsTest" time="0.001"/>
+  <testcase name="convertMaptoHashMap" classname="PracticePainPointsTest" time="0"/>
+  <testcase name="convertMapToList" classname="PracticePainPointsTest" time="0"/>
+  <testcase name="sortKeysFromHashMap" classname="PracticePainPointsTest" time="0.008">
+    <failure message="expected: &lt;brett&gt; but was: &lt;a&gt;" type="org.opentest4j.AssertionFailedError"><![CDATA[org.opentest4j.AssertionFailedError: expected: <brett> but was: <a>
+	at PracticePainPointsTest.sortKeysFromHashMap(PracticePainPointsTest.java:192)
+]]></failure>
   </testcase>
-  <testcase name="testCase1" classname="HourGlassSumTest" time="0">
-    <skipped message="This test is skipped because it is not meant to be implemented."/>
-  </testcase>
-  <testcase name="testZeroSum" classname="HourGlassSumTest" time="0">
-    <skipped message="This test is skipped because it is not meant to be implemented."/>
-  </testcase>
+  <testcase name="sortKeysFromMap" classname="PracticePainPointsTest" time="0"/>
+  <testcase name="convertMapToArrayListObjects" classname="PracticePainPointsTest" time="0"/>
+  <testcase name="sortValuesInSet" classname="PracticePainPointsTest" time="0.001"/>
+  <testcase name="sortValuesFromMap" classname="PracticePainPointsTest" time="0.001"/>
+  <testcase name="convertMapToHashSet" classname="PracticePainPointsTest" time="0"/>
+  <testcase name="sortList" classname="PracticePainPointsTest" time="0"/>
+  <testcase name="sortArrayListIntegers" classname="PracticePainPointsTest" time="0"/>
+  <testcase name="convertSetToHashMapPreJava8" classname="PracticePainPointsTest" time="0"/>
+  <testcase name="convertMapToSet" classname="PracticePainPointsTest" time="0.001"/>
 </testsuite>

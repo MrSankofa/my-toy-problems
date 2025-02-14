@@ -15,10 +15,10 @@ public class CommonChildTest {
   }
 
   @Test
-  @DisplayName("Should work for more complex example")
+  @DisplayName("Should return 0 for no matching substrings")
   public void shouldWorkForMoreComplexExample() {
 
-    assertEquals(2, CommonChild.commonChild("SH", "BCD"));
+    assertEquals(0, CommonChild.commonChild("SH", "BCD"));
   }
 
   @Test

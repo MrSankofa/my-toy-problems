@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="HourGlassSumTest" time="0" tests="3" errors="0" skipped="3" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="CommonChildTest" time="0.001" tests="4" errors="0" skipped="0" failures="1">
   <properties>
     <property name="java.specification.version" value="21"/>
     <property name="sun.jnu.encoding" value="UTF-8"/>
@@ -57,13 +57,12 @@
     <property name="socksNonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
     <property name="java.class.version" value="65.0"/>
   </properties>
-  <testcase name="testCase0" classname="HourGlassSumTest" time="0">
-    <skipped message="This test is skipped because it is not meant to be implemented."/>
+  <testcase name="findLongestCommonStringNonSkippingLetters" classname="CommonChildTest" time="0"/>
+  <testcase name="firstTryMethodShouldWorkForBasicExample" classname="CommonChildTest" time="0"/>
+  <testcase name="shouldWorkForMoreComplexExample" classname="CommonChildTest" time="0.001">
+    <failure message="expected: &lt;2&gt; but was: &lt;0&gt;" type="org.opentest4j.AssertionFailedError"><![CDATA[org.opentest4j.AssertionFailedError: expected: <2> but was: <0>
+	at CommonChildTest.shouldWorkForMoreComplexExample(CommonChildTest.java:21)
+]]></failure>
   </testcase>
-  <testcase name="testCase1" classname="HourGlassSumTest" time="0">
-    <skipped message="This test is skipped because it is not meant to be implemented."/>
-  </testcase>
-  <testcase name="testZeroSum" classname="HourGlassSumTest" time="0">
-    <skipped message="This test is skipped because it is not meant to be implemented."/>
-  </testcase>
+  <testcase name="firstTryMethodShouldWillNotWorkForReverseExample" classname="CommonChildTest" time="0"/>
 </testsuite>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>MaxToys.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">java-toy-problems</a> &gt; <a href="index.source.html" class="el_package">default</a> &gt; <span class="el_source">MaxToys.java</span></div><h1>MaxToys.java</h1><pre class="source lang-java linenums">import java.util.List;
+
+<span class="nc" id="L3">public class MaxToys {</span>
+
+  public static int maxToys(List&lt;Integer&gt; toybox, int budget) {
+
+    // sort the list in ascending order
+<span class="fc" id="L8">    toybox.sort(Integer::compareTo);</span>
+
+    // declare count and sum
+<span class="fc" id="L11">    int count = 0;</span>
+<span class="fc" id="L12">    int sum = 0;</span>
+
+    // for each price in toybox
+<span class="fc bfc" id="L15" title="All 2 branches covered.">    for(int price : toybox) {</span>
+      // add price to sum
+<span class="fc" id="L17">      sum += price;</span>
+      // check if sum &lt;= budget
+<span class="fc bfc" id="L19" title="All 2 branches covered.">      if(sum &lt;= budget) {</span>
+<span class="fc" id="L20">        count++;</span>
+      } else {
+        break;
+      }
+<span class="fc" id="L24">    }</span>
+
+<span class="fc" id="L26">    return count;</span>
+  }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>
