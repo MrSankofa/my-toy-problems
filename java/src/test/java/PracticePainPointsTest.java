@@ -189,9 +189,9 @@ public class PracticePainPointsTest {
     List<String> list = PracticePainPoints.sortMapKeys(map);
     assertTrue(list instanceof ArrayList);
     assertEquals(3, list.size());
-    assertEquals("brett", list.get(0));
-    assertEquals("courtney", list.get(1));
-    assertEquals("josh", list.get(2));
+    assertEquals("a", list.get(0));
+    assertEquals("b", list.get(1));
+    assertEquals("c", list.get(2));
 
   }
 
