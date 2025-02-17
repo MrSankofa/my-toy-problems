@@ -2,6 +2,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -9,6 +10,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class PracticePainPointsTest {
 
   HashSet<Integer> set = new HashSet<>();
+  HashSet<Integer> unordered = new HashSet<>();
+  HashSet<String> stringSet = new HashSet<>();
   Map<String, Integer> map = new HashMap<>(Map.of("a", 1, "b", 2, "c", 3));
   Map<String, Person> mapObjects = new HashMap<>(
       Map.of(
@@ -20,6 +23,8 @@ public class PracticePainPointsTest {
   @BeforeEach
   void setUp() {
     set = new HashSet<>(Set.of(1,2,3,4,5));
+    stringSet = new HashSet<>(Set.of("Apricot","apple","Acorn","banana","Carrot"));
+    unordered = new HashSet<>(Set.of(3,5,1,4,2));
     map = new HashMap<>(Map.of("a", 1, "b", 2, "c", 3));
   }
 
@@ -207,19 +212,131 @@ public class PracticePainPointsTest {
   }
 
   @Test
-  public void sortValuesFromHashMap() {}
+  public void sortValuesFromHashMap() {
+    List<Integer> list = PracticePainPoints.sortValuesFromHashMap(map);
+
+    assertTrue(list instanceof ArrayList);
+    assertEquals(3, list.size());
+    assertEquals(1, list.get(0));
+    assertEquals(2, list.get(1));
+    assertEquals(3, list.get(2));
+
+  }
 
   @Test
-  public void sortValuesInSet() {}
+  public void sortValuesInSet() {
+    List<Integer> list = PracticePainPoints.sortValuesFromSet(set);
+    assertTrue(list instanceof ArrayList);
+    assertEquals(5, list.size());
+    assertEquals(1, list.get(0));
+    assertEquals(2, list.get(1));
+    assertEquals(3, list.get(2));
+    assertEquals(4, list.get(3));
+    assertEquals(5, list.get(4));
+  }
 
   @Test
-  public void sortList() {}
+  public void sortList() {
+    List<Person> list = PracticePainPoints.sortPersonsFromMap(mapObjects);
+    assertTrue(list instanceof ArrayList);
+    assertEquals(3, list.size());
+    assertTrue(list.get(0).name.toLowerCase() == "courtney");
+    assertTrue(list.get(1).name.toLowerCase() == "brett");
+    assertTrue(list.get(2).name.toLowerCase() == "josh");
+  }
 
   @Test
-  public void sortArrayList() {}
+  public void sortArrayListInReverse() {
+    List<Person> list = PracticePainPoints.sortPersonsFromMap(mapObjects);
+    assertEquals(3, list.size());
+    Collections.reverse(list);
+    assertEquals("courtney", list.get(2).name.toLowerCase());
+    assertEquals("brett", list.get(1).name.toLowerCase());
+    assertEquals("josh", list.get(0).name.toLowerCase());
+  }
 
   @Test
-  public void sortArrayListIntegers() {}
+  public void sortArrayListIntegersLexicographicalOrderStream() {
+    List<Integer> list = set.stream().sorted().collect(Collectors.toList());
+
+    assertTrue(list instanceof ArrayList);
+    assertEquals(5, list.size());
+    assertEquals(1, list.get(0));
+    assertEquals(2, list.get(1));
+    assertEquals(3, list.get(2));
+    assertEquals(4, list.get(3));
+    assertEquals(5, list.get(4));
+
+  }
+
+  @Test
+  public void sortArrayListStringLexicographicalOrderStream() {
+    List<String> list = stringSet.stream().sorted().collect(Collectors.toList());
+
+    assertTrue(list instanceof ArrayList);
+    assertEquals(5, list.size());
+    assertEquals("Acorn", list.get(0));
+    assertEquals("Apricot", list.get(1));
+    assertEquals("Carrot", list.get(2));
+    assertEquals("apple", list.get(3));
+    assertEquals("banana", list.get(4));
+  }
+
+  @Test
+  public void sortArrayListStringAlphabeticallyStream() {
+    List<String> list = stringSet.stream().sorted(String.CASE_INSENSITIVE_ORDER).collect(Collectors.toList());
+
+    assertTrue(list instanceof ArrayList);
+    assertEquals(5, list.size());
+    assertEquals("Acorn", list.get(0));
+    assertEquals("apple", list.get(1));
+    assertEquals("Apricot", list.get(2));
+    assertEquals("banana", list.get(3));
+    assertEquals("Carrot", list.get(4));
+  }
+
+  @Test
+  public void testSortReverseLexicographically() {
+    List<String> list = stringSet.stream().sorted().collect(Collectors.toList());
+
+    assertTrue(list instanceof ArrayList);
+    assertEquals(5, list.size());
+    assertEquals("Acorn", list.get(0));
+    assertEquals("Apricot", list.get(1));
+    assertEquals("Carrot", list.get(2));
+    assertEquals("apple", list.get(3));
+    assertEquals("banana", list.get(4));
+
+  }
+
+  @Test
+  public void sortStringByShortestLengthFirst() {
+    List<String> list = stringSet.stream().sorted(Comparator.comparing(String::length).thenComparing(Comparator.naturalOrder())).collect(Collectors.toList());
+
+    assertTrue(list instanceof ArrayList);
+    assertEquals(5, list.size());
+    assertEquals("Acorn", list.get(0));
+    assertEquals("apple", list.get(1));
+    assertEquals("Carrot", list.get(2));
+    assertEquals("banana", list.get(3));
+    assertEquals("Apricot", list.get(4));
+
+
+  }
+
+  @Test
+  public void sortStringByLongestLengthFirst() {
+    List<String> list = stringSet.stream().sorted(Comparator.comparing(String::length).thenComparing(Comparator.naturalOrder()).reversed()).collect(Collectors.toList());
+
+    assertEquals(5, list.size());
+    assertEquals("Acorn", list.get(4));
+    assertEquals("apple", list.get(3));
+    assertEquals("Carrot", list.get(2));
+    assertEquals("banana", list.get(1));
+    assertEquals("Apricot", list.get(0));
+  }
+
+
 
 
 

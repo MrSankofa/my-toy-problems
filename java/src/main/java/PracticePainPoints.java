@@ -1,4 +1,5 @@
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class PracticePainPoints {
 
@@ -130,6 +131,18 @@ public class PracticePainPoints {
     Collections.sort(list);
 
     return list;
+  }
+
+  public static <T> List<T> sortValuesFromHashMap(Map map) {
+    return (List<T>) map.values().stream().collect(Collectors.toList());
+  }
+
+  public static  <T> List<T> sortValuesFromSet(Set set) {
+    return (List<T>) set.stream().sorted().collect(Collectors.toList());
+  }
+
+  public static List<Person> sortPersonsFromMap(Map<String, Person> map) {
+    return map.values().stream().sorted(Comparator.comparingInt(p -> p.age)).collect(Collectors.toList());
   }
 
 
