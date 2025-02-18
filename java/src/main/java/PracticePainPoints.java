@@ -3,6 +3,8 @@ import java.util.stream.Collectors;
 
 public class PracticePainPoints {
 
+  // TODO: int array to arrayList of integer
+
   public static Map convertHashSetToMap(HashSet set) {
 
     Map map = new HashMap();
