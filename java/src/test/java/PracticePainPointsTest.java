@@ -20,12 +20,23 @@ public class PracticePainPointsTest {
       "josh", new Person("josh", 40, 'm')
       )
   );
+
+  int[] intArr = {5,4,3,2,1,6,7,8,9,10};
+  String[] stringArr = {"f", "e", "d", "a", "b", "c"};
+  String[] lexicoGraphically = {"f", "e", "d", "a", "b", "c","F", "E", "D", "A", "B", "C"};
+  String practice = "practice";
+
+
   @BeforeEach
   void setUp() {
     set = new HashSet<>(Set.of(1,2,3,4,5));
     stringSet = new HashSet<>(Set.of("Apricot","apple","Acorn","banana","Carrot"));
     unordered = new HashSet<>(Set.of(3,5,1,4,2));
     map = new HashMap<>(Map.of("a", 1, "b", 2, "c", 3));
+    intArr = new int[]{5, 4, 3, 2, 1, 6, 7, 8, 9, 10};
+    stringArr = new String[]{"f", "e", "d", "a", "b", "c"};
+    lexicoGraphically = new String[]{"f", "e", "d", "a", "b", "c", "F", "E", "D", "A", "B", "C"};
+    practice = "practice";
   }
 
 
@@ -338,6 +349,233 @@ public class PracticePainPointsTest {
 
 
   // TODO: int array to arrayList<Integer>
+  @Test
+  public void convertIntArrayToArrayList() {
+
+    List<Integer> underTest;
+
+    // other ways:
+    // underTest = IntStream.of(intArr).boxed().collect(Collectors.toList());
+    // List<Integer> underTest = List.of(Arrays.stream(intArr).boxed().toArray(Integer[]::new));
+    /*
+    * List<Integer> underTest = new ArrayList<>();
+      for (int num : intArr) {
+          underTest.add(num);
+      }
+      *
+      * Your original approach is efficient and idiomatic in modern Java (Java 8+).
+      * If immutability is needed, List.of() is an option.
+      * Otherwise, Arrays.stream(intArr).boxed().collect(Collectors.toList())
+      * is the best choice for a modifiable list.
+
+    * */
+    underTest = Arrays.stream(intArr).boxed().collect(Collectors.toList());
+
+    assertTrue(underTest instanceof List);
+    assertEquals(10, underTest.size());
+    assertEquals(5, underTest.get(0));
+    assertEquals(4, underTest.get(1));
+    assertEquals(3, underTest.get(2));
+    assertEquals(2, underTest.get(3));
+    assertEquals(1, underTest.get(4));
+
+  }
+
+  @Test
+  public void sortListOfIntegersUsingCollection() {
+    List<Integer> underTest = Arrays.stream(intArr).boxed().collect(Collectors.toList());
+
+    assertTrue(underTest instanceof List);
+
+    // other ways:
+    // underTest.sort(Integer::compareTo); // Ascending order
+    // List<Integer> sortedList = underTest.stream()
+    //                                    .sorted()
+    //                                    .collect(Collectors.toList());
+    // int[] sortedArr = underTest.stream().mapToInt(Integer::intValue).toArray();
+    //Arrays.sort(sortedArr);
+    // underTest.sort((a,b) -> { return a - b; }
+    Collections.sort(underTest);
+
+    assertEquals(10, underTest.size());
+    assertEquals(1, underTest.get(0));
+    assertEquals(2, underTest.get(1));
+    assertEquals(3, underTest.get(2));
+    assertEquals(4, underTest.get(3));
+    assertEquals(5, underTest.get(4));
+    assertEquals(6, underTest.get(5));
+    assertEquals(7, underTest.get(6));
+    assertEquals(8, underTest.get(7));
+    assertEquals(9, underTest.get(8));
+    assertEquals(10, underTest.get(9));
+
+  }
+
+  @Test
+  public void sortListOfIntegersUsingStream() {
+    List<Integer> underTest = Arrays.stream(intArr).boxed().collect(Collectors.toList());
+
+    assertTrue(underTest instanceof List);
+
+    //    underTest = underTest.stream().sorted().collect(Collectors.toList());
+//    underTest.sort((a, b) -> {
+//      return a - b;
+//    });
+
+    assertEquals(10, underTest.size());
+    assertEquals(1, underTest.get(0));
+    assertEquals(2, underTest.get(1));
+    assertEquals(3, underTest.get(2));
+    assertEquals(4, underTest.get(3));
+    assertEquals(5, underTest.get(4));
+    assertEquals(6, underTest.get(5));
+    assertEquals(7, underTest.get(6));
+    assertEquals(8, underTest.get(7));
+    assertEquals(9, underTest.get(8));
+    assertEquals(10, underTest.get(9));
+
+  }
+
+  @Test
+  public void sortListOfIntegersUsingStreamReverse() {
+    List<Integer> underTest = Arrays.stream(intArr).boxed().sorted(Comparator.reverseOrder()).collect(Collectors.toList());
+    assertTrue(underTest instanceof List);
+
+
+    assertEquals(10, underTest.size());
+    assertEquals(10, underTest.get(0));
+    assertEquals(9, underTest.get(1));
+    assertEquals(8, underTest.get(2));
+    assertEquals(7, underTest.get(3));
+    assertEquals(6, underTest.get(4));
+    assertEquals(5, underTest.get(5));
+    assertEquals(4, underTest.get(6));
+    assertEquals(3, underTest.get(7));
+    assertEquals(2, underTest.get(8));
+    assertEquals(1, underTest.get(9));
+
+  }
+
+  @Test
+  public void sortListOfIntegersUsingCollectionReverse() {
+    List<Integer> underTest = Arrays.stream(intArr).boxed().collect(Collectors.toList());
+
+    assertTrue(underTest instanceof List);
+
+    Collections.sort(underTest, Comparator.reverseOrder());
+
+    assertEquals(10, underTest.size());
+    assertEquals(10, underTest.get(0));
+    assertEquals(9, underTest.get(1));
+    assertEquals(8, underTest.get(2));
+    assertEquals(7, underTest.get(3));
+    assertEquals(6, underTest.get(4));
+    assertEquals(5, underTest.get(5));
+    assertEquals(4, underTest.get(6));
+    assertEquals(3, underTest.get(7));
+    assertEquals(2, underTest.get(8));
+    assertEquals(1, underTest.get(9));
+
+
+  }
+
+  //
+
+  @Test
+  public void convertStringArrayToArrayList() {
+    List<String> underTest = Arrays.stream(stringArr).collect(Collectors.toList());
+
+    assertTrue(underTest instanceof List);
+    assertEquals(6, underTest.size());
+    assertEquals("f", underTest.get(0));
+    assertEquals("e", underTest.get(1));
+    assertEquals("d", underTest.get(2));
+    assertEquals("a", underTest.get(3));
+    assertEquals("b", underTest.get(4));
+    assertEquals("c", underTest.get(5));
+
+
+  }
+
+  @Test
+  public void sortListOfStringsUsingCollection() {
+    List<String> underTest = Arrays.stream(stringArr).collect(Collectors.toList());
+
+    Collections.sort(underTest);
+
+    assertTrue(underTest instanceof List);
+    assertEquals(6, underTest.size());
+    assertEquals("a", underTest.get(0));
+    assertEquals("b", underTest.get(1));
+    assertEquals("c", underTest.get(2));
+    assertEquals("d", underTest.get(3));
+    assertEquals("e", underTest.get(4));
+    assertEquals("f", underTest.get(5));
+
+
+  }
+
+  @Test
+  public void sortListOfStringsUsingStream() {
+    List<String> underTest = Arrays.stream(stringArr).sorted().collect(Collectors.toList());
+
+    assertTrue(underTest instanceof List);
+    assertEquals(6, underTest.size());
+    assertEquals("a", underTest.get(0));
+    assertEquals("b", underTest.get(1));
+    assertEquals("c", underTest.get(2));
+    assertEquals("d", underTest.get(3));
+    assertEquals("e", underTest.get(4));
+    assertEquals("f", underTest.get(5));
+
+  }
+
+  @Test
+  public void sortListOfStringsUsingStreamReverse() {
+    List<String> underTest = Arrays.stream(stringArr).sorted(Comparator.reverseOrder()).collect(Collectors.toList());
+
+    assertEquals(6, underTest.size());
+    assertEquals("f", underTest.get(0));
+    assertEquals("e", underTest.get(1));
+    assertEquals("d", underTest.get(2));
+    assertEquals("c", underTest.get(3));
+    assertEquals("b", underTest.get(4));
+    assertEquals("a", underTest.get(5));
+
+
+  }
+
+  @Test
+  public void sortListOfStringsUsingCollectionReverse() {
+    List<String> underTest = Arrays.asList(stringArr);
+//    List<String> underTest = Arrays.stream(stringArr).collect(Collectors.toList());
+
+    Collections.sort(underTest, Comparator.reverseOrder());
+
+    assertEquals(6, underTest.size());
+    assertEquals("f", underTest.get(0));
+    assertEquals("e", underTest.get(1));
+    assertEquals("d", underTest.get(2));
+    assertEquals("c", underTest.get(3));
+    assertEquals("b", underTest.get(4));
+    assertEquals("a", underTest.get(5));
+
+  }
+
+  @Test
+  public void useReduceOnListOfIntegers() {
+    List<Integer> underTest = Arrays.stream(intArr).boxed().collect(Collectors.toList());
+
+    assertEquals(55, underTest.stream().reduce(0, Integer::sum));
+    assertEquals(55, underTest.stream().reduce(0, (cv, acc) -> {
+      return cv + acc;
+    }));
+
+
+  }
+
+
+
 
 
 
