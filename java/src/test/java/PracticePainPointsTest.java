@@ -44,8 +44,11 @@ public class PracticePainPointsTest {
   public void convertSetToMap() {
 
 
-
+    // you just have to stream and initialize the map
     Map newMap = PracticePainPoints.convertHashSetToMap(set);
+
+    // comment out and retry
+
 
     assertTrue(newMap instanceof Map);
 
@@ -59,6 +62,8 @@ public class PracticePainPointsTest {
 
   @Test
   public void convertSetToMapPreJava8() {
+
+    // without stream you would need to use an iterator
     Map newMap = PracticePainPoints.convertHashSetToMapPreJava8(set);
 
     assertTrue(newMap instanceof Map);
@@ -74,6 +79,7 @@ public class PracticePainPointsTest {
   @Test
   public void convertSetToHashMapPreJava8() {
 
+    // still use an iterator
     HashMap newMap = PracticePainPoints.convertHashSetToHashMapPreJava8(set);
 
     assertTrue(newMap instanceof Map);
@@ -89,6 +95,8 @@ public class PracticePainPointsTest {
   @Test
   public void convertSetToHashMap() {
 
+    // use a stream on the set to populate the map with kv being the element from the set
+    // use forEach
     HashMap newMap = PracticePainPoints.convertHashSettoHashMap(set);
 
     assertTrue(newMap instanceof Map);
@@ -103,6 +111,7 @@ public class PracticePainPointsTest {
 
   @Test
   public void convertMapToSet() {
+    // Map has values or keys that are in a list. then you can stream from that
     Set set = PracticePainPoints.convertMapToSet(map);
     assertTrue(set instanceof HashSet);
 
@@ -138,7 +147,10 @@ public class PracticePainPointsTest {
 
   @Test
   public void convertMapToList() {
-    List<Integer> ints = PracticePainPoints.convertMapToListInts(map);
+    // values, keys or entriys
+
+//    List<Integer> ints = PracticePainPoints.convertMapToListInts(map);
+    List<Integer> ints = map.values().stream().collect(Collectors.toList());
 
     assertTrue(ints instanceof List);
     assertEquals(3, ints.size());
@@ -149,6 +161,7 @@ public class PracticePainPointsTest {
 
   @Test
   public void convertMapToArrayListIntegers() {
+    // manually iterate through map to get Arraylist
     ArrayList<Integer> ints = PracticePainPoints.convertMapToArrayLists(map);
 
     assertTrue(ints instanceof ArrayList);
@@ -160,6 +173,8 @@ public class PracticePainPointsTest {
 
   @Test
   public void convertMapToArrayInt() {
+    // manually just have to initialize the array to be the size of the entries list
+    // you can use forEach on map, or entry from stream, then use getKey and getValue on the entry
     int[] arrayInt = PracticePainPoints.convertMapToArrayInt(map);
 
     assertTrue(arrayInt instanceof int[]);
@@ -177,6 +192,7 @@ public class PracticePainPointsTest {
 
   @Test
   public void convertMapToArrayListObjects() {
+    // manual
     ArrayList<Person> list = PracticePainPoints.convertMapToArrayObjects(mapObjects);
 
     assertTrue(list instanceof ArrayList);
@@ -214,6 +230,8 @@ public class PracticePainPointsTest {
   @Test
   public void sortValuesFromMap() {
     List<Integer> list = PracticePainPoints.sortMapToListInts(map);
+
+//    List<Integer> list = map.values().stream().collect(Collectors.toList());
 
     assertTrue(list instanceof ArrayList);
     assertEquals(3, list.size());
