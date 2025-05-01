@@ -27,6 +27,7 @@ public class PracticePainPointsTest {
   String practice = "practice";
 
 
+
   @BeforeEach
   void setUp() {
     set = new HashSet<>(Set.of(1,2,3,4,5));
@@ -38,6 +39,17 @@ public class PracticePainPointsTest {
     lexicoGraphically = new String[]{"f", "e", "d", "a", "b", "c", "F", "E", "D", "A", "B", "C"};
     practice = "practice";
   }
+
+  // TODO:
+
+  // convert array to list
+  // convert list to array
+  // list to ArrayList
+  // array to ArrayList
+  // Arraylist to array
+  // ArrayList to list
+  //
+
 
 
   @Test
@@ -340,7 +352,10 @@ public class PracticePainPointsTest {
 
   @Test
   public void sortStringByShortestLengthFirst() {
-    List<String> list = stringSet.stream().sorted(Comparator.comparing(String::length).thenComparing(Comparator.naturalOrder())).collect(Collectors.toList());
+    List<String> list = stringSet.stream()
+        .sorted(Comparator.comparing(String::length)
+        .thenComparing(Comparator.naturalOrder()))
+        .collect(Collectors.toList());
 
     assertTrue(list instanceof ArrayList);
     assertEquals(5, list.size());
@@ -387,6 +402,8 @@ public class PracticePainPointsTest {
       * is the best choice for a modifiable list.
 
     * */
+
+
     underTest = Arrays.stream(intArr).boxed().collect(Collectors.toList());
 
     assertTrue(underTest instanceof List);
