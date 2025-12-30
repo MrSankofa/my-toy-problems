@@ -4,6 +4,7 @@ import java.util.stream.Collectors;
 public class PracticePainPoints {
 
   // TODO: int array to arrayList of integer
+  // TODO: how to initialize a set with values on the declaration line
 
   public static Map convertHashSetToMap(HashSet set) {
 
@@ -146,8 +147,5 @@ public class PracticePainPoints {
   public static List<Person> sortPersonsFromMap(Map<String, Person> map) {
     return map.values().stream().sorted(Comparator.comparingInt(p -> p.age)).collect(Collectors.toList());
   }
-
-
-
 
 }
