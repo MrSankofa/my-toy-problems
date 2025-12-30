@@ -1,8 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: PracticePainPointsTest
 -------------------------------------------------------------------------------
-Tests run: 35, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 0.02 s <<< FAILURE! - in PracticePainPointsTest
-sortListOfIntegersUsingStream  Time elapsed: 0.005 s  <<< FAILURE!
-org.opentest4j.AssertionFailedError: expected: <1> but was: <5>
-	at PracticePainPointsTest.sortListOfIntegersUsingStream(PracticePainPointsTest.java:461)
-
+Tests run: 35, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.017 s - in PracticePainPointsTest

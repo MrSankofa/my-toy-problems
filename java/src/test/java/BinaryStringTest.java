@@ -13,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.*;
 * example
 * s = "011001"
 *
-* the substrings 01, 10, 1100, and 01 have equal numbers of 0s and 1s with all 0s and 1s grouped consecutiyvely.
+* the substrings 01, 10, 1100, and 01 have equal numbers of 0s and 1s with all 0s and 1s grouped consecutively.
 * Hence, the answer is 4. Note that the substring 0110 has an equal number of 0s and 1s but is not counted because
 * not all 0s and 1s are grouped together.
 *
@@ -46,6 +46,6 @@ class BinaryStringTest {
   @Test
   void getSubstringCount() {
 
-    assertEquals(3, BinaryString.getSubstringCount("011001"));
+    assertEquals(4, BinaryString.getSubstringCount("011001"));
   }
 }

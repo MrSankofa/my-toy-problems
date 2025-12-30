@@ -4,6 +4,8 @@ public class SumOfList {
 
   public static int sumOfList(List<Integer> arr) {
 
-    return 0;
+    int result = arr.stream().reduce(0, (x, y) -> x + y);
+
+    return result;
   }
 }

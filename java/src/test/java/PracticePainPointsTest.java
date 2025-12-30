@@ -457,6 +457,8 @@ public class PracticePainPointsTest {
 //      return a - b;
 //    });
 
+    underTest = Arrays.stream(intArr).boxed().sorted().collect(Collectors.toList());
+
     assertEquals(10, underTest.size());
     assertEquals(1, underTest.get(0));
     assertEquals(2, underTest.get(1));

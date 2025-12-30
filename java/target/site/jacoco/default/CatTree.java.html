@@ -19,17 +19,13 @@
     }
 
     static boolean isColorADescendent(CatTree catTree, String targetColor) {
-<span class="fc bfc" id="L22" title="All 2 branches covered.">        if(catTree == null) return false;</span>
+<span class="pc bpc" id="L22" title="1 of 2 branches missed.">        if (catTree == null) return false;</span>
 
-<span class="fc bfc" id="L24" title="All 2 branches covered.">        if(targetColor.startsWith(catTree.value)) {</span>
-<span class="pc bpc" id="L25" title="1 of 2 branches missed.">            if(targetColor.equals(catTree.value)) {</span>
-<span class="nc" id="L26">                return true;</span>
-            }
-
-<span class="pc bpc" id="L29" title="2 of 4 branches missed.">            return isColorADescendent(catTree.left, targetColor) || isColorADescendent(catTree.right, targetColor);</span>
+<span class="pc bpc" id="L24" title="2 of 4 branches missed.">        if (catTree.value != null &amp;&amp; targetColor.startsWith(catTree.value)) {</span>
+<span class="fc" id="L25">            return true;</span>
         }
 
-<span class="fc" id="L32">        return false;</span>
+<span class="nc bnc" id="L28" title="All 4 branches missed.">        return isColorADescendent(catTree.left, targetColor) || isColorADescendent(catTree.right, targetColor);</span>
     }
 
 }
