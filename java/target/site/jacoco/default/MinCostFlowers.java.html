@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>MinCostFlowers.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">java-toy-problems</a> &gt; <a href="index.source.html" class="el_package">default</a> &gt; <span class="el_source">MinCostFlowers.java</span></div><h1>MinCostFlowers.java</h1><pre class="source lang-java linenums">
+import java.util.*;
+import java.util.stream.*;
+
+<span class="nc" id="L5">public class MinCostFlowers {</span>
+
+  public static int getMinimumCost(int k, int[] c) {
+
+    // Overview:
+    // the Florist is making the first flower that they buy without an upcharge
+    // so (0 + 1) + the price of the flower they buy
+
+    // the second flower that person buys will be:
+    // (1 + 1) + the price of the flower they buy for c array
+
+    // so it is most beneficial for each person from the group to buy the most expensive
+    // flowers first
+
+    // input:
+    // k tells how many people are in our group
+    // c is a list of flower prices.
+
+    // the group will buy all of the flowers but they will do so in a way that is the cheapest
+
+    // output:
+    // return the cheapest cost to buy all of the flowers based on how many ppl are in your group
+
+    // flowers = [1,2,3,4]
+    // k = 3 (group of three)
+
+    // (0 + 1) * 2 + (0 + 1) * 3 + (0 + 1) * 4 + (1 + 1) * 1 = 2 + 3 + 4 + 2 = 11
+
+    // the amount of flowers that k can exist are between 1 and 100
+    // The amount of people in the group is between 1 and 100
+    // the price is between 1 and 10000
+
+
+    // sort the list in descending order
+
+    // declare int flowersPurchased = 0;
+    // declare int minCost = 0;
+
+    // for each flowerPrice in c, starting with index = 0; while index &lt; k
+    // minCost += (flowersPurchased + 1) * flowerPrice
+
+
+    // use the remaining flowerPrices and sort them in ascending order
+
+    // increment flowersPurchased
+    // for each flowerPrice in filteredSortedC, starting with index = 0, while index &lt; filteredSortedC.length()
+
+    // minCost += (flowersPurchased + 1) * flowerPrice
+
+
+    // return minCost
+
+
+    // todo how to convert an int[] to ArrayList&lt;Integer&gt;
+    // c = [1,2,3,4], k = 3
+    // c = [1,2,3,4], k = 5
+
+
+<span class="fc" id="L63">    int flowersPurchased = 0;</span>
+<span class="fc" id="L64">    int minCost = 0;</span>
+<span class="fc" id="L65">    List&lt;Integer&gt; flowerPrices = new ArrayList&lt;&gt;();</span>
+
+<span class="pc bpc" id="L67" title="1 of 2 branches missed.">    if (k &lt; c.length) {</span>
+      // the flowers purchased will increment and you start with the most expensive first
+      // then get the remaining and sort in ascending order
+      // remaining flowerPrices and sorted in ascending order
+
+
+<span class="fc" id="L73">      List&lt;Integer&gt; descFlowerPrices = Arrays.stream(c).boxed().sorted(Comparator.reverseOrder()).collect(Collectors.toList());</span>
+
+<span class="fc bfc" id="L75" title="All 2 branches covered.">      for (int i = 0; i &lt; k; i++) {</span>
+<span class="fc" id="L76">        minCost += (flowersPurchased + 1) * descFlowerPrices.get(i);</span>
+      }
+
+<span class="fc" id="L79">      flowersPurchased++;</span>
+
+<span class="fc" id="L81">      List&lt;Integer&gt; remainingAscFlowerPrices = descFlowerPrices.subList(k, c.length);</span>
+<span class="fc" id="L82">      Collections.sort(remainingAscFlowerPrices);</span>
+
+<span class="fc bfc" id="L84" title="All 2 branches covered.">      for (int i = 0; i &lt; remainingAscFlowerPrices.size(); i++) {</span>
+<span class="fc" id="L85">        minCost += (flowersPurchased + 1) * remainingAscFlowerPrices.get(i);</span>
+
+<span class="fc bfc" id="L87" title="All 2 branches covered.">        if ((i + 1) % k == 0) {</span>
+<span class="fc" id="L88">          flowersPurchased++;</span>
+        }
+      }
+
+<span class="fc" id="L92">      return minCost;</span>
+<span class="nc bnc" id="L93" title="All 2 branches missed.">    } else if (k == c.length) {</span>
+      // it doesn't matter what order you buy in all will be bought without an upcharge
+
+<span class="nc bnc" id="L96" title="All 2 branches missed.">      for (int flowerPrice : c) {</span>
+<span class="nc" id="L97">        minCost += flowerPrice;</span>
+      }
+
+<span class="nc" id="L100">      return minCost;</span>
+    } else {
+      // you'll want to sort in ascending order and buy until each person from the group of size k has bought a flower
+      // if k is greater than n or the number of flowers then
+      // I thought that k would always be less than or equal to the number of flowers, n but k can be greater.
+      // this still means all flowers will be bought but there is no upcharge
+
+<span class="nc" id="L107">      List&lt;Integer&gt; ascFlowerPrices = Arrays.stream(c).boxed().sorted().collect(Collectors.toList());</span>
+
+<span class="nc bnc" id="L109" title="All 2 branches missed.">      for (int i = 0; i &lt; ascFlowerPrices.size(); i++) {</span>
+<span class="nc" id="L110">        minCost += ascFlowerPrices.get(i);</span>
+      }
+
+
+<span class="nc" id="L114">      return minCost;</span>
+
+    }
+  }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

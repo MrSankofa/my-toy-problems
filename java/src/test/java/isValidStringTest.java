@@ -13,7 +13,7 @@ class isValidStringTest {
 //  void isValidString2() throws IOException, URISyntaxException {
 //    // Assumes "hugeInput.txt" is located in src/test/resources/
 //
-//
+//```
 //    assertEquals("YES", IsValidString.isValidString("hugeString"));
 //  }
 

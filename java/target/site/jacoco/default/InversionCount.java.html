@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>InversionCount.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">java-toy-problems</a> &gt; <a href="index.source.html" class="el_package">default</a> &gt; <span class="el_source">InversionCount.java</span></div><h1>InversionCount.java</h1><pre class="source lang-java linenums">import java.util.List;
+
+<span class="nc" id="L3">public class InversionCount {</span>
+
+  public static long InversionCount(List&lt;Integer&gt; arr) {
+
+<span class="fc" id="L7">    int n = arr.size();</span>
+<span class="fc" id="L8">    Integer[] temp = new Integer[n];</span>
+
+<span class="fc" id="L10">    return mergeSortAndCount(arr, temp, 0, n-1);</span>
+  }
+
+  // Recursive merge sort function
+  private static long mergeSortAndCount(List&lt;Integer&gt; arr, Integer[] temp, int left, int right) {
+<span class="fc" id="L15">    long inversionCount = 0;</span>
+
+<span class="fc bfc" id="L17" title="All 2 branches covered.">    if (left &lt; right) {</span>
+<span class="fc" id="L18">      int mid = (left + right) / 2;</span>
+
+      // Count inversions in left subarray
+<span class="fc" id="L21">      inversionCount += mergeSortAndCount(arr, temp, left, mid);</span>
+
+      // Count inversions in right subarray
+<span class="fc" id="L24">      inversionCount += mergeSortAndCount(arr, temp, mid + 1, right);</span>
+
+      // Count cross-inversions during merge
+<span class="fc" id="L27">      inversionCount += mergeAndCount(arr, temp, left, mid, right);</span>
+    }
+
+<span class="fc" id="L30">    return inversionCount;</span>
+  }
+
+  // Merge function to count and sort
+  private static long mergeAndCount(List&lt;Integer&gt; arr, Integer[] temp, int left, int mid, int right) {
+<span class="fc" id="L35">    int i = left;       // Left subarray pointer</span>
+<span class="fc" id="L36">    int j = mid + 1;    // Right subarray pointer</span>
+<span class="fc" id="L37">    int k = left;       // Temp array pointer</span>
+<span class="fc" id="L38">    long inversionCount = 0;</span>
+
+    // Merge while counting inversions
+<span class="fc bfc" id="L41" title="All 4 branches covered.">    while (i &lt;= mid &amp;&amp; j &lt;= right) {</span>
+<span class="fc bfc" id="L42" title="All 2 branches covered.">      if (arr.get(i) &lt;= arr.get(j)) {</span>
+<span class="fc" id="L43">        temp[k++] = arr.get(i++);</span>
+      } else {
+<span class="fc" id="L45">        temp[k++] = arr.get(j++);</span>
+        // Count inversions: all remaining elements in left subarray are greater
+<span class="fc" id="L47">        inversionCount += (mid - i + 1);</span>
+      }
+    }
+
+    // Copy remaining elements from left subarray
+<span class="fc bfc" id="L52" title="All 2 branches covered.">    while (i &lt;= mid) {</span>
+<span class="fc" id="L53">      temp[k++] = arr.get(i++);</span>
+    }
+
+    // Copy remaining elements from right subarray
+<span class="fc bfc" id="L57" title="All 2 branches covered.">    while (j &lt;= right) {</span>
+<span class="fc" id="L58">      temp[k++] = arr.get(j++);</span>
+    }
+
+    // Copy merged elements back to the original list
+<span class="fc bfc" id="L62" title="All 2 branches covered.">    for (i = left; i &lt;= right; i++) {</span>
+<span class="fc" id="L63">      arr.set(i, temp[i]);</span>
+    }
+
+<span class="fc" id="L66">    return inversionCount;</span>
+  }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>
