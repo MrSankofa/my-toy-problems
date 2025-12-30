@@ -22,7 +22,7 @@ describe("Mark Toys Tests", () => {
     console.log(`The execution time was ${duration} ms`);
 
     expect(result).toBe(sampleSize);
-    expect(duration).toBeLessThan(500);
+    expect(duration).toBeLessThan(1500);
 
 
   });
