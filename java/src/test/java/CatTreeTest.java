@@ -1,7 +1,7 @@
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
 class CatTreeTest {
@@ -26,6 +26,6 @@ class CatTreeTest {
         String targetColor = "white-brown-red-blue";
 
 
-        assertEquals(true, CatTreeTest.isColorADescendent(catTree, targetColor));
+        assertTrue(CatTree.isColorADescendent(catTree, targetColor));
     }
 }
